@@ -4,4 +4,13 @@
 
 #Примечание: Попробуйте импортировать как весь модуль целиком (например из задачи 1), так и отдельные функции из модуля.
 
-import
+import Ex1
+
+from Ex2 import randomChoice
+
+
+Ex1.addDirs()
+Ex1.remDirs()
+
+
+print(randomChoice([1,2,3,4,5,6,7,8]))
