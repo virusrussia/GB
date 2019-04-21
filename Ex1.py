@@ -6,7 +6,8 @@ with open ("text.txt","r") as f:
     print(text)
 
 #Разбиваем на отдельные предложения
-list=re.split("\. ",text)
+list=re.split("\.[\s\t\n\r]",text)
+print(len(list))
 
 #Выбираем слова, длинной более 4 символов
 l1=re.findall("[а-яА-Я]{4,}",text)
