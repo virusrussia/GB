@@ -21,7 +21,4 @@ Soup=BS(text, "html.parser")
 
 li=Soup.find_all("div")
 
-
-for n in li:
-   if n.get("class","")=="col":
-       print(n.get("span",""))
+print(li[5])
