@@ -1,24 +1,11 @@
-#1. Получить количество учеников с сайта geekbrains.ru:
+#1. Написать функцию получения IATA-кода города из его названия, используя API Aviasales.
 
-#a) при помощи регулярных выражений,
+import requests, json   
 
-import re
-from bs4 import BeautifulSoup as BS
+city=input("Введите название города: ")
 
-with open ("GeekBrains - образовательный портал.html","r") as f:
-    text=f.read()
+resp=requests.get(f"https://www.travelpayouts.com/widgets_suggest_params?q=Из%20{city}%20в%20Цюрих")
 
-peoples = re.findall("total-users\">(Нас уже .*?)</span>",text)
+iata=json.loads(resp.text)
 
-print(peoples)
-
-#<div class="col"><span class="total-users">Нас уже 3 734 172 человек</span>
-#<a class="btn sign-in" href="/login">Войти</a></div></div>
-
-#b) при помощи библиотеки BeautifulSoup.
-
-Soup=BS(text, "html.parser")
-
-li=Soup.find_all("div")
-
-print(li[5])
+print("Код IATA для введенного города - ",iata["origin"]["iata"])
