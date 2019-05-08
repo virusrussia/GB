@@ -1,24 +1,47 @@
-#1. Получить количество учеников с сайта geekbrains.ru:
+# 1. Создайте класс Word.
+# 2. Добавьте свойства text и part of speech.
+# 3. Добавьте возможность создавать объект слово со значениями в скобках.
+# 4. Создайте класс Sentence
+# 5. Добавьте свойство content, равное списку, состоящему из номеров слов, входящих в предложение.
+# 6. Добавьте метод show, составляющий предложение.
+# 7. Добавьте метод show_parts, отображающий, какие части речи входят в предложение.
 
-#a) при помощи регулярных выражений,
 
-import re
-from bs4 import BeautifulSoup as BS
+class Word:
+    text = "Unknown"
+    part_of_speech ="Unknown"
+    
+    def __init__(self, word=None,part=None):
+        if word and part:
+            self.text=word
+            self.part_of_speech=part
 
-with open ("GeekBrains - образовательный портал.html","r") as f:
-    text=f.read()
 
-peoples = re.findall("total-users\">(Нас уже .*?)</span>",text)
+class Sentence:
+    content=[]
+    word_list=[]
+    
+    def __init__(self,content=[], word_list=[]):
+        if (content and word_list):
+            self.content=content
+            self.word_list=word_list         
 
-print(peoples)
+    def show(self):
+        temp = ""
+        for i in self.content:
+            temp = f"{temp}{self.word_list[i].text} "
+        return temp
 
-#<div class="col"><span class="total-users">Нас уже 3 734 172 человек</span>
-#<a class="btn sign-in" href="/login">Войти</a></div></div>
+    def show_parts (self):
+        temp = ""        
+        for i in range(0,len(self.word_list)):
+            temp=f"{temp}{self.word_list[i].part_of_speech} "
+        
+        return temp
 
-#b) при помощи библиотеки BeautifulSoup.
 
-Soup=BS(text, "html.parser")
+obj_sentence = Sentence([2, 1, 0], [Word('раму', 'существительное'), Word('мыла', 'глагол'), Word('мама', 'существительное')])
 
-li=Soup.find_all("div")
+print(obj_sentence.show())
 
-print(li[5])
+print(obj_sentence.show_parts())
